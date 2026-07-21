@@ -5,7 +5,7 @@ import json
 import requests
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from playwright_stealth import stealth_sync
+from playwright_stealth import Stealth
 from bs4 import BeautifulSoup
 import tempfile
 import base64
@@ -94,7 +94,7 @@ def scrape_nitter_with_playwright(target, dynamic_instances=None):
                 page = context.new_page()
                 
                 # 应用 Stealth 插件绕过检测
-                stealth_sync(page)
+                Stealth().apply_stealth_sync(page)
                 
                 if is_search:
                     url = f"{instance.rstrip('/')}/search?f=tweets&q={requests.utils.quote(keyword)}"
